@@ -5,6 +5,8 @@ import './App.css';
 import PropTypes from 'prop-types'
 // css
 import styled from '@emotion/styled'
+// styled components
+import { Button } from '@material-ui/core';
 
 
 /*
@@ -15,9 +17,9 @@ const PokemonRow = ({ pokemon, onSelect }) => (
     <td>{pokemon.name.english}</td>
     <td>{pokemon.type.join(", ")}</td>
     <td>
-      <button
+      <Button
         onClick={() => onSelect(pokemon)}
-      >Select!</button>
+      >Select!</Button>
     </td>
   </tr>
 )
@@ -122,7 +124,7 @@ function App() {
       <Title className="title">Pokemon Search</Title>
       <TwoColumnLayout>
         <div>
-          <Input value={filter}
+          <Input nput value={filter}
             onChange={(evt) => filterSet(evt.target.value)}
           />
           <table width="100%">
