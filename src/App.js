@@ -3,6 +3,8 @@ import './App.css';
 // set of property types which allow us to identify each ptoperty of our 
 // components using types, eg. string, array, bool etc
 import PropTypes from 'prop-types'
+// css
+import styled from '@emotion/styled'
 
 
 /*
@@ -67,6 +69,32 @@ PokemonInfo.propTypes = {
 }
 
 /*
+** @emotion/styled is Case Sensitive, also pretty much the equivelant on vuejs's 
+** built in <style></style>
+*/
+const Title = styled.h1`
+  text-align: center; 
+`;
+
+const TwoColumnLayout = styled.div`
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column-gap: 1rem;
+`;
+
+const Container = styled.div`
+  margin: auto;
+  width: 800px;
+  paddingTop: 1rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  font-size: x-large;
+  padding: 0.2rem;
+`;
+
+/*
 ** App 
 */
 function App() {
@@ -90,21 +118,11 @@ function App() {
   }, [])
 
   return (
-    <div style={{
-      margin: 'auto',
-      width: '800',
-      paddingTop: '1rem'
-    }}>
-      <h1 className="title">Pokemon Search</h1>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '70% 30%',
-          gridColumnGap: '1rem'
-        }}
-      >
+    <Container>
+      <Title className="title">Pokemon Search</Title>
+      <TwoColumnLayout>
         <div>
-          <input value={filter}
+          <Input value={filter}
             onChange={(evt) => filterSet(evt.target.value)}
           />
           <table width="100%">
@@ -138,8 +156,8 @@ function App() {
         PokemonInfo component which we pass the selectedItem state which is being set byt the selectedItemSet 
         state on onSelect */}
         {selectedItem && <PokemonInfo {...selectedItem} />}
-      </div>
-    </div>
+      </TwoColumnLayout>
+    </Container>
   );
 }
 
