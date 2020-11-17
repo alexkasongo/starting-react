@@ -1,5 +1,26 @@
 import './App.css';
+// set of property types which allow us to identify each ptoperty of our 
+// components using types, eg. string, array, bool etc
+import PropTypes from 'prop-types'
 import pokemon from './pokemon.json'
+
+// components in react are created using a function
+const PokemonRow = ({ pokemon }) => (
+  <tr>
+    <td>{pokemon.name.english}</td>
+    <td>{pokemon.type.join(", ")}</td>
+  </tr>
+)
+
+// PropTypes
+PokemonRow.propTypes = {
+  pokemon: PropTypes.shape({
+    name: PropTypes.shape({
+      english: PropTypes.string,
+    }),
+    type: PropTypes.arrayOf(PropTypes.string),
+  }),
+}
 
 function App() {
   return (
@@ -17,11 +38,8 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {pokemon.map(pokemon => (
-            <tr key={[pokemon.id, pokemon.name.english].join(":")}>
-              <td>{pokemon.name.english}</td>
-              <td>{pokemon.type.join(", ")}</td>
-            </tr>
+          {pokemon.slice(0, 20).map(pokemon => (
+            <PokemonRow pokemon={pokemon} key={pokemon.id} />
           ))}
         </tbody>
       </table>
