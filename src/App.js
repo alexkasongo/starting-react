@@ -82,10 +82,12 @@ function App() {
   */
 
   React.useEffect(() => {
-
+    fetch('http://localhost:3000/starting-react/pokemon.json')
+      .then(resp => resp.json())
+      .then(data => pokemonSet(data))
     //if the array is empty, this function gets run once when the page is loaded/mounted,
     // like vuejs's mounted
-  }, [filter])
+  }, [])
 
   return (
     <div style={{
