@@ -70,7 +70,9 @@ PokemonInfo.propTypes = {
 ** App 
 */
 function App() {
-  // we use react hook to get state
+  /*
+  ** We use react hook to get state. eg. selectedItemSet sets the state for selectedItem  
+  */
   const [filter, filterSet] = React.useState("");
   const [selectedItem, selectedItemSet] = React.useState(null);
 
@@ -112,12 +114,16 @@ function App() {
                     key={pokemon.id}
                     onSelect={(pokemon) => {
                       selectedItemSet(pokemon)
+                      console.log(`App.js - 115 - we here`, selectedItem);
                     }}
                   />
                 ))}
             </tbody>
           </table>
         </div>
+        {/* below is the same code as above but shorter. Inside of selectedItem we have the 
+        PokemonInfo component which we pass the selectedItem state which is being set byt the selectedItemSet 
+        state on onSelect */}
         {selectedItem && <PokemonInfo {...selectedItem} />}
       </div>
     </div>
