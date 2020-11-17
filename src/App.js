@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css';
 // set of property types which allow us to identify each ptoperty of our 
 // components using types, eg. string, array, bool etc
@@ -23,6 +24,9 @@ PokemonRow.propTypes = {
 }
 
 function App() {
+  // we use react hook to get state
+  const [filter, filterSet] = React.useState("");
+
   return (
     <div style={{
       margin: 'auto',
@@ -30,6 +34,9 @@ function App() {
       paddingTop: '1rem'
     }}>
       <h1 className="title">Pokemon Search</h1>
+      <input value={filter}
+        onChange={(evt) => filterSet(evt.target.value)}
+      />
       <table width="100%">
         <thead>
           <tr>
@@ -37,10 +44,13 @@ function App() {
             <th>Type</th>
           </tr>
         </thead>
+        {/* .includes is case sensitive so use toLowerCase */}
         <tbody>
-          {pokemon.slice(0, 20).map(pokemon => (
-            <PokemonRow pokemon={pokemon} key={pokemon.id} />
-          ))}
+          {pokemon
+            .filter((pokemon) => pokemon.name.english.toLowerCase().includes(filter.toLowerCase()))
+            .slice(0, 20).map(pokemon => (
+              <PokemonRow pokemon={pokemon} key={pokemon.id} />
+            ))}
         </tbody>
       </table>
     </div>
