@@ -3,7 +3,7 @@ import './App.css';
 // set of property types which allow us to identify each ptoperty of our 
 // components using types, eg. string, array, bool etc
 import PropTypes from 'prop-types'
-import pokemon from './pokemon.json'
+
 
 /*
 ** components in react are created using a function 
@@ -74,7 +74,18 @@ function App() {
   ** We use react hook to get state. eg. selectedItemSet sets the state for selectedItem  
   */
   const [filter, filterSet] = React.useState("");
+  const [pokemon, pokemonSet] = React.useState([]);
   const [selectedItem, selectedItemSet] = React.useState(null);
+
+  /*
+  ** useEffect() runs afunction in reaction to a change. Functions are placed in the array
+  */
+
+  React.useEffect(() => {
+
+    //if the array is empty, this function gets run once when the page is loaded/mounted,
+    // like vuejs's mounted
+  }, [filter])
 
   return (
     <div style={{
@@ -83,9 +94,6 @@ function App() {
       paddingTop: '1rem'
     }}>
       <h1 className="title">Pokemon Search</h1>
-      <input value={filter}
-        onChange={(evt) => filterSet(evt.target.value)}
-      />
       <div
         style={{
           display: 'grid',
@@ -94,6 +102,9 @@ function App() {
         }}
       >
         <div>
+          <input value={filter}
+            onChange={(evt) => filterSet(evt.target.value)}
+          />
           <table width="100%">
             <thead>
               <tr>
