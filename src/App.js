@@ -1,4 +1,5 @@
 import './App.css';
+import pokemon from './pokemon.json'
 
 function App() {
   return (
@@ -16,10 +17,12 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Bulbasaur</td>
-            <td>Grass, Poisen</td>
-          </tr>
+          {pokemon.map(pokemon => (
+            <tr key={[pokemon.id, pokemon.name.english].join(":")}>
+              <td>{pokemon.name.english}</td>
+              <td>{pokemon.type.join(", ")}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
