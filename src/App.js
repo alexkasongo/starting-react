@@ -5,7 +5,9 @@ import './App.css';
 import PropTypes from 'prop-types'
 import pokemon from './pokemon.json'
 
-// components in react are created using a function
+/*
+** components in react are created using a function 
+*/
 const PokemonRow = ({ pokemon, onSelect }) => (
   <tr>
     <td>{pokemon.name.english}</td>
@@ -37,7 +39,9 @@ const PokemonInfo = ({ name, base }) => (
   </div>
 )
 
-// PropTypes
+/*
+** Typechecking With PropTypes 
+*/
 PokemonRow.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.shape({
@@ -62,6 +66,9 @@ PokemonInfo.propTypes = {
   })
 }
 
+/*
+** App 
+*/
 function App() {
   // we use react hook to get state
   const [filter, filterSet] = React.useState("");
