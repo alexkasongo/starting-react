@@ -10,7 +10,7 @@ const PokemonTable = ({ pokemon, filter, selectedPokemonSet }) => (
             </tr>
         </thead>
         {/* .includes is case sensitive so use toLowerCase */}
-        <tbody >
+        <tbody>
             {pokemon
                 .filter((pokemon) => pokemon.name.english
                     .toLocaleLowerCase()
@@ -18,6 +18,7 @@ const PokemonTable = ({ pokemon, filter, selectedPokemonSet }) => (
                 )
                 .slice(0, 20).map(pokemon => (
                     <PokemonRow
+                        key={pokemon.id}
                         pokemon={pokemon}
                         onClick={(pokemon) => selectedPokemonSet(pokemon)}
                     />

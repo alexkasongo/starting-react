@@ -18,7 +18,8 @@ const PokemonRow = ({ pokemon, onClick }) => (
             <Button
                 variant="contained"
                 color="primary"
-                onClick={() => onClick(pokemon)}
+                onClick={() => console.log('You clicked me')}
+            // onClick={() => onClick(pokremon)}
             >More Information
             </Button>
         </td>
