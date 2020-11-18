@@ -5,31 +5,9 @@ import styled from "@emotion/styled";
 // styled components
 import { CssBaseline } from '@material-ui/core';
 
-import PokemonType from './PokemonType';
-
 import PokemonRow from './components/PokemonRow';
-
-const PokemonInfo = ({ name, base }) => (
-  <div>
-    <h1>{name.english}</h1>
-    <table width="100%">
-      {/* object.keys takes an object and returns an array */}
-      {
-        Object.keys(base).map(key => (
-          <tbody key={key}>
-            <tr>
-              <td>{key}</td>
-              <td>{base[key]}</td>
-            </tr>
-          </tbody>
-        ))
-      }
-    </table>
-  </div>
-)
-
-
-PokemonInfo.propTypes = PokemonType;
+import PokemonInfo from './components/PokemonRow';
+import PokemonFilter from './components/PokemonFilter'
 
 /*
 ** @emotion/styled is Case Sensitive, also pretty much the equivelant on vuejs's 
@@ -49,12 +27,6 @@ const PageContainer = styled.div`
   margin: auto;
   width: 800px;
   paddingTop: 1rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  font-size: x-large;
-  padding: 0.2rem;
 `;
 
 /*
@@ -86,8 +58,9 @@ function App() {
       <Title className="title">Pokemon Search</Title>
       <TwoColumnLayout>
         <div>
-          <Input nput value={filter}
-            onChange={(evt) => filterSet(evt.target.value)}
+          <PokemonFilter
+            filter={filter}
+            filterSet={filterSet}
           />
           <table width="100%">
             <thead>
