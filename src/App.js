@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 // styled components
 import { Button } from '@material-ui/core';
+import { render } from '@testing-library/react';
 
 
 /*
@@ -98,70 +99,85 @@ const Input = styled.input`
 `;
 
 /*
-** App 
+** Class based App component
 */
-function App() {
-  /*
-  ** We use react hook to get state. eg. selectedItemSet sets the state for selectedItem  
-  */
-  const [filter, filterSet] = React.useState("");
-  const [pokemon, pokemonSet] = React.useState([]);
-  const [selectedItem, selectedItemSet] = React.useState(null);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filter: "",
+      pokemon: [],
+      selectedItem: null,
+    }
+  }
 
-  /*
-  ** useEffect() runs afunction in reaction to a change. Functions are placed in the array
-  */
-
-  React.useEffect(() => {
+  componentDidMount() {
     fetch('http://localhost:3000/starting-react/pokemon.json')
       .then(resp => resp.json())
-      .then(data => pokemonSet(data))
-    //if the array is empty, this function gets run once when the page is loaded/mounted,
-    // like vuejs's mounted
-  }, [])
+      .then(data => this.setState({
+        ...this.state,
+        pokemon: data
+      })
+      );
+  }
 
-  return (
-    <Container>
-      <Title className="title">Pokemon Search</Title>
-      <TwoColumnLayout>
-        <div>
-          <Input nput value={filter}
-            onChange={(evt) => filterSet(evt.target.value)}
-          />
-          <table width="100%">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            {/* .includes is case sensitive so use toLowerCase */}
-            <tbody>
-              {pokemon
-                .filter((pokemon) => pokemon.name.english
-                  .toLowerCase()
-                  .includes(filter.toLowerCase())
-                )
-                .slice(0, 20).map(pokemon => (
-                  <PokemonRow
-                    pokemon={pokemon}
-                    key={pokemon.id}
-                    onSelect={(pokemon) => {
-                      selectedItemSet(pokemon)
-                      console.log(`App.js - 115 - we here`, selectedItem);
-                    }}
-                  />
-                ))}
-            </tbody>
-          </table>
-        </div>
-        {/* below is the same code as above but shorter. Inside of selectedItem we have the 
+  // Render method does not take any methods
+  render() {
+    return (
+      <Container>
+        <Title className="title">Pokemon Search</Title>
+        <TwoColumnLayout>
+          <div>
+            <Input nput value={this.state.filter}
+              onChange={(evt) => this.setState({
+                ...this.state,
+                filter: evt.target.value
+              })}
+            />
+            <table width="100%">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              {/* .includes is case sensitive so use toLowerCase */}
+              <tbody>
+                {this.state.pokemon
+                  .filter((pokemon) => pokemon.name.english
+                    .toLowerCase()
+                    .includes(this.state.filter.toLowerCase())
+                  )
+                  .slice(0, 20).map(pokemon => (
+                    <PokemonRow
+                      pokemon={pokemon}
+                      key={pokemon.id}
+                      onSelect={(pokemon) => this.setState({
+                        ... this.state,
+                        selectedItem: (pokemon),
+                      })}
+                    />
+                  ))}
+              </tbody>
+            </table>
+          </div>
+          {/* below is the same code as above but shorter. Inside of selectedItem we have the 
         PokemonInfo component which we pass the selectedItem state which is being set byt the selectedItemSet 
         state on onSelect */}
-        {selectedItem && <PokemonInfo {...selectedItem} />}
-      </TwoColumnLayout>
-    </Container>
-  );
+          {this.state.selectedItem && <PokemonInfo {...this.state.selectedItem} />}
+        </TwoColumnLayout>
+      </Container>
+    )
+  }
 }
+
+/*
+** useEffect() runs afunction in reaction to a change. Functions are placed in the array
+*/
+//  React.useEffect(() => {
+//   fetch('http://localhost:3000/starting-react/pokemon.json')
+//     .then(resp => resp.json())
+//     .then(data => pokemonSet(data))
+// }, [])
 
 export default App;
