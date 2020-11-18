@@ -5,9 +5,10 @@ import styled from "@emotion/styled";
 // styled components
 import { CssBaseline } from '@material-ui/core';
 
-import PokemonRow from './components/PokemonRow';
+// import PokemonRow from './components/PokemonRow';
 import PokemonInfo from './components/PokemonRow';
 import PokemonFilter from './components/PokemonFilter'
+import PokemonTable from './components/PokemonTable'
 
 /*
 ** @emotion/styled is Case Sensitive, also pretty much the equivelant on vuejs's 
@@ -34,11 +35,11 @@ const PageContainer = styled.div`
 */
 function App() {
   /*
-  ** We use react hook to get state. eg. selectedItemSet sets the state for selectedItem  
+  ** We use react hook to get state. eg. selectedPokemonSet sets the state for selectedPokemon  
   */
   const [filter, filterSet] = React.useState("");
   const [pokemon, pokemonSet] = React.useState([]);
-  const [selectedItem, selectedItemSet] = React.useState(null);
+  const [selectedPokemon, selectedPokemonSet] = React.useState(null);
 
   /*
   ** useEffect() runs afunction in reaction to a change. Functions are placed in the array
@@ -62,34 +63,16 @@ function App() {
             filter={filter}
             filterSet={filterSet}
           />
-          <table width="100%">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            {/* .includes is case sensitive so use toLowerCase */}
-            <tbody>
-              {pokemon
-                .filter((pokemon) => pokemon.name.english
-                  .toLowerCase()
-                  .includes(filter.toLowerCase())
-                )
-                .slice(0, 20).map(pokemon => (
-                  <PokemonRow
-                    pokemon={pokemon}
-                    key={pokemon.id}
-                    onClick={(pokemon) => selectedItemSet(pokemon)}
-                  />
-                ))}
-            </tbody>
-          </table>
+          <PokemonTable
+            filter={filter}
+            pokemon={pokemon}
+            selectedPokemonSet={selectedPokemonSet}
+          />
         </div>
-        {/* below is the same code as above but shorter. Inside of selectedItem we have the 
-        PokemonInfo component which we pass the selectedItem state which is being set byt the selectedItemSet 
+        {/* below is the same code as above but shorter. Inside of selectedPokemon we have the 
+        PokemonInfo component which we pass the selectedPokemon state which is being set byt the selectedPokemonSet 
         state on onClick */}
-        {selectedItem && <PokemonInfo {...selectedItem} />}
+        {selectedPokemon && <PokemonInfo {...selectedPokemon} />}
       </TwoColumnLayout>
     </PageContainer>
   );
