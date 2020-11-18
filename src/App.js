@@ -1,30 +1,13 @@
 import React from 'react';
 import './App.css';
-// set of property types which allow us to identify each ptoperty of our 
-// components using types, eg. string, array, bool etc
-import PropTypes from 'prop-types';
 // css
 import styled from "@emotion/styled";
 // styled components
-import { Button, CssBaseline } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 
+import PokemonType from './PokemonType';
 
-
-/*
-** components in react are created using a function 
-*/
-const PokemonRow = ({ pokemon, onSelect }) => (
-  <tr>
-    <td>{pokemon.name.english}</td>
-    <td>{pokemon.type.join(", ")}</td>
-    <td>
-      <Button
-        variant="contained" color="primary"
-        onClick={() => onSelect(pokemon)}
-      >Select!</Button>
-    </td>
-  </tr>
-)
+import PokemonRow from './components/PokemonRow';
 
 const PokemonInfo = ({ name, base }) => (
   <div>
@@ -45,32 +28,8 @@ const PokemonInfo = ({ name, base }) => (
   </div>
 )
 
-/*
-** Typechecking With PropTypes 
-*/
-PokemonRow.propTypes = {
-  pokemon: PropTypes.shape({
-    name: PropTypes.shape({
-      english: PropTypes.string.isRequired,
-    }),
-    type: PropTypes.arrayOf(PropTypes.string.isRequired),
-    onSelect: PropTypes.func,
-  }),
-}
 
-PokemonInfo.propTypes = {
-  name: PropTypes.shape({
-    english: PropTypes.string.isRequired,
-  }),
-  base: PropTypes.shape({
-    HP: PropTypes.number.isRequired,
-    Attack: PropTypes.number.isRequired,
-    Defense: PropTypes.number.isRequired,
-    "Sp. Attack": PropTypes.number.isRequired,
-    "Sp. Defense": PropTypes.number.isRequired,
-    Speed: PropTypes.number.isRequired
-  })
-}
+PokemonInfo.propTypes = PokemonType;
 
 /*
 ** @emotion/styled is Case Sensitive, also pretty much the equivelant on vuejs's 
@@ -148,7 +107,7 @@ function App() {
                   <PokemonRow
                     pokemon={pokemon}
                     key={pokemon.id}
-                    onSelect={(pokemon) => selectedItemSet(pokemon)}
+                    onClick={(pokemon) => selectedItemSet(pokemon)}
                   />
                 ))}
             </tbody>
@@ -156,7 +115,7 @@ function App() {
         </div>
         {/* below is the same code as above but shorter. Inside of selectedItem we have the 
         PokemonInfo component which we pass the selectedItem state which is being set byt the selectedItemSet 
-        state on onSelect */}
+        state on onClick */}
         {selectedItem && <PokemonInfo {...selectedItem} />}
       </TwoColumnLayout>
     </PageContainer>
