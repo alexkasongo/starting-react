@@ -13,12 +13,15 @@ import PokemonContext from '../PokemonContext';
 // we need filter and we need filterset useState hook
 // this passed down as props, using {destructuring} 
 const PokemonFilter = () => {
-  const { filter, filterSet } = useContext(PokemonContext);
+  const { state: { filter }, dispatch } = useContext(PokemonContext);
   // const { classes } = this.props;
   return (
     <form noValidate autoComplete="off">
       <TextField id="outlined-basic" label="Outlined" variant="outlined" value={filter}
-        onChange={(evt) => filterSet(evt.target.value)}
+        onChange={(evt) => dispatch({
+          type: 'SET_FILTER',
+          payload: evt.target.value
+        })}
       />
     </form>
   )

@@ -3,7 +3,7 @@ import PokemonContext from '../PokemonContext';
 // import PokemonType from '../PokemonType';
 
 const PokemonInfo = () => {
-    const { selectedPokemon } = useContext(PokemonContext)
+    const { state: { selectedPokemon } } = useContext(PokemonContext)
 
     // if we have a selecrtedPokemon we retun a React tree otherwise we return null
     return selectedPokemon ? (
