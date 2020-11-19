@@ -9,6 +9,7 @@ import { CssBaseline } from '@material-ui/core';
 import PokemonInfo from './components/PokemonInfo';
 import PokemonFilter from './components/PokemonFilter'
 import PokemonTable from './components/PokemonTable'
+import PokemonContext from './PokemonContext'
 
 /*
 ** @emotion/styled is Case Sensitive, also pretty much the equivelant on vuejs's 
@@ -54,28 +55,34 @@ function App() {
   }, [])
 
   return (
-    <PageContainer>
-      <CssBaseline />
-      <Title className="title">Pokemon Search</Title>
-      <TwoColumnLayout>
-        <div>
-          <PokemonFilter
-            filter={filter}
-            filterSet={filterSet}
-          />
-          <PokemonTable
-            filter={filter}
-            pokemon={pokemon}
-            selectedPokemonSet={selectedPokemonSet}
-          />
-        </div>
-        {/* below is the same code as above but shorter. Inside of selectedPokemon we have the 
+    // we wrap everything inside the provider, which is going to provide the data 
+    // to any component in the tree from this level down
+    <PokemonContext.Provider
+      value={{
+        filter,
+        filterSet,
+        pokemon,
+        pokemonSet,
+        selectedPokemon,
+        selectedPokemonSet
+      }}
+    >
+      <PageContainer>
+        <CssBaseline />
+        <Title className="title">Pokemon Search</Title>
+        <TwoColumnLayout>
+          <div>
+            <PokemonFilter />
+            <PokemonTable />
+          </div>
+          {/* below is the same code as above but shorter. Inside of selectedPokemon we have the 
         PokemonInfo component which we pass the selectedPokemon state which is being set by the selectedPokemonSet 
         state on onClick */}
 
-        {selectedPokemon && <PokemonInfo {...selectedPokemon} />}
-      </TwoColumnLayout>
-    </PageContainer>
+          <PokemonInfo />
+        </TwoColumnLayout>
+      </PageContainer>
+    </PokemonContext.Provider>
   );
 }
 
