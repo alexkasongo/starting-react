@@ -22,7 +22,7 @@ const PokemonRow = ({ pokemon, onClick }) => (
                 onClick={() => {
                     onClick(pokemon)
                 }}
-            >More Information
+            >More Info
             </Button>
         </td>
     </tr>
@@ -32,7 +32,7 @@ const PokemonRow = ({ pokemon, onClick }) => (
 ** Typechecking With PropTypes 
 */
 PokemonRow.propTypes = {
-    pokemon: PropTypes.arrayOf(PokemonType),
+    pokemon: PropTypes.arrayOf(PokemonType.isRequired),
 };
 
 export default PokemonRow;

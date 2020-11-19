@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 ** components in react are created using a function 
 */
 const PokemonType = PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.shape({
         english: PropTypes.string.isRequired,
         japanese: PropTypes.string.isRequired,
@@ -24,5 +24,8 @@ const PokemonType = PropTypes.shape({
     }),
 });
 
+PropTypes.arrayOf(
+
+)
 
 export default PokemonType;
