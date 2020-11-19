@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { CssBaseline } from '@material-ui/core';
 
 // import PokemonRow from './components/PokemonRow';
-import PokemonInfo from './components/PokemonRow';
+import PokemonInfo from './components/PokemonInfo';
 import PokemonFilter from './components/PokemonFilter'
 import PokemonTable from './components/PokemonTable'
 
@@ -51,7 +51,9 @@ function App() {
       .then(data => pokemonSet(data))
     //if the array is empty, this function gets run once when the page is loaded/mounted,
     // like vuejs's mounted
-  }, [])
+
+    console.log(`App.js - 55 - 🤷🏾‍♂️`, selectedPokemon);
+  }, [selectedPokemon])
 
   return (
     <PageContainer>
@@ -70,8 +72,9 @@ function App() {
           />
         </div>
         {/* below is the same code as above but shorter. Inside of selectedPokemon we have the 
-        PokemonInfo component which we pass the selectedPokemon state which is being set byt the selectedPokemonSet 
+        PokemonInfo component which we pass the selectedPokemon state which is being set by the selectedPokemonSet 
         state on onClick */}
+
         {selectedPokemon && <PokemonInfo {...selectedPokemon} />}
       </TwoColumnLayout>
     </PageContainer>

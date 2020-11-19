@@ -3,28 +3,31 @@ import PokemonRow from './PokemonRow';
 
 const PokemonTable = ({ pokemon, filter, selectedPokemonSet }) => (
     <table width="100%">
-        <thead>
+        {/* <thead>
             <tr>
                 <th>Name</th>
                 <th>Type</th>
             </tr>
-        </thead>
+        </thead> */}
         {/* .includes is case sensitive so use toLowerCase */}
         <tbody>
             {pokemon
                 .filter((pokemon) => pokemon.name.english
-                    .toLocaleLowerCase()
-                    .includes(filter.toLocaleLowerCase())
+                    .toLowerCase()
+                    .includes(filter.toLowerCase())
                 )
-                .slice(0, 20).map(pokemon => (
+                .slice(0, 20)
+                .map((pokemon) => (
                     <PokemonRow
                         key={pokemon.id}
                         pokemon={pokemon}
-                        onClick={(pokemon) => selectedPokemonSet(pokemon)}
+                        onClick={(pokemon) => {
+                            selectedPokemonSet(pokemon)
+                        }}
                     />
                 ))}
         </tbody>
     </table>
-)
+);
 
 export default PokemonTable;

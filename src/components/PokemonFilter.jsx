@@ -11,9 +11,9 @@ const Input = styled.input`
 // we need filter and we need filterset useState hook
 // this passed down as props, using {destructuring} 
 const PokemonFilter = ({ filter, filterSet }) => (
-    <Input nput value={filter}
-        onChange={(evt) => filterSet(evt.target.value)}
-    />
+  <Input value={filter}
+    onChange={(evt) => filterSet(evt.target.value)}
+  />
 )
 
 export default PokemonFilter

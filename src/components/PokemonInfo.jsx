@@ -1,7 +1,8 @@
 import React from 'react';
-import PokemonType from './PokemonType';
+import PokemonType from '../PokemonType';
 
 const PokemonInfo = ({ name, base }) => (
+
     <div>
         <h1>{name.english}</h1>
         <table width="100%">
