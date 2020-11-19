@@ -3,12 +3,12 @@ import PokemonRow from './PokemonRow';
 
 const PokemonTable = ({ pokemon, filter, selectedPokemonSet }) => (
     <table width="100%">
-        {/* <thead>
+        <thead>
             <tr>
                 <th>Name</th>
                 <th>Type</th>
             </tr>
-        </thead> */}
+        </thead>
         {/* .includes is case sensitive so use toLowerCase */}
         <tbody>
             {pokemon

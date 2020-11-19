@@ -51,9 +51,7 @@ function App() {
       .then(data => pokemonSet(data))
     //if the array is empty, this function gets run once when the page is loaded/mounted,
     // like vuejs's mounted
-
-    console.log(`App.js - 55 - 🤷🏾‍♂️`, selectedPokemon);
-  }, [selectedPokemon])
+  }, [])
 
   return (
     <PageContainer>

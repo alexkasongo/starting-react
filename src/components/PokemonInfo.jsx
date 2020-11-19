@@ -1,5 +1,5 @@
 import React from 'react';
-import PokemonType from '../PokemonType';
+// import PokemonType from '../PokemonType';
 
 const PokemonInfo = ({ name, base }) => (
 
@@ -22,6 +22,6 @@ const PokemonInfo = ({ name, base }) => (
 )
 
 
-PokemonInfo.propTypes = PokemonType;
+// PokemonInfo.propTypes = PokemonType;
 
 export default PokemonInfo;
