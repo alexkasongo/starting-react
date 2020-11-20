@@ -88,7 +88,7 @@ function App() {
         })
       );
     //if the array is empty, this function gets run once when the page is loaded/mounted,
-    // like vuejs's mounted
+    // like vuejs's mounted.
   }, []);
 
   if (!state.pokemon) {
