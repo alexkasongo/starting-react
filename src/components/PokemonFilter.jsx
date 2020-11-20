@@ -16,8 +16,8 @@ const PokemonFilter = () => {
   const { state: { filter }, dispatch } = useContext(PokemonContext);
   // const { classes } = this.props;
   return (
-    <form noValidate autoComplete="off">
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" value={filter}
+    <form noValidate>
+      <TextField fullWidth id="outlined-basic" label="Outlined" variant="outlined" value={filter}
         onChange={(evt) => dispatch({
           type: 'SET_FILTER',
           payload: evt.target.value
