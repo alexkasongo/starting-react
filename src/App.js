@@ -34,10 +34,10 @@ const PageContainer = styled.div`
 `;
 
 /*
-  ** Reducer: a function that takes state and an action, the state is the current state of the store
-  ** the action is an object that defines the mutation that is to be applied to state 
-  ** and then a new state is to be returned
-  */
+** Reducer: a function that takes state and an action, the state is the current state of the store
+** the action is an object that defines the mutation that is to be applied to state 
+** and then a new state is to be returned
+*/
 const pokemonReducer = (state = {
   pokemon: [],
   filter: '',
