@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
-import PokemonContext from '../PokemonContext';
+import React from 'react'
+import { useSelector } from 'react-redux';
+
 // import PokemonType from '../PokemonType';
 
 const PokemonInfo = () => {
-    const { state: { selectedPokemon } } = useContext(PokemonContext)
+    const selectedPokemon = useSelector(state => state.selectedPokemon)
 
     // if we have a selecrtedPokemon we retun a React tree otherwise we return null
     return selectedPokemon ? (

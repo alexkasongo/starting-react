@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 // css
 import { TextField } from '@material-ui/core';
 // import styled from "@emotion/styled";
-import PokemonContext from '../PokemonContext';
 
 // const Input = styled.input`
 //   width: 100%;
@@ -13,8 +13,9 @@ import PokemonContext from '../PokemonContext';
 // we need filter and we need filterset useState hook
 // this passed down as props, using {destructuring} 
 const PokemonFilter = () => {
-  const { state: { filter }, dispatch } = useContext(PokemonContext);
-  // const { classes } = this.props;
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.filter)
+
   return (
     <form noValidate>
       <TextField fullWidth id="outlined-basic" label="Outlined" variant="outlined" value={filter}
